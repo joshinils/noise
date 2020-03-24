@@ -1,12 +1,11 @@
 #include "Aether.h"
 #include "plane/Plane.h"
-#include <stdlib.h>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include <iostream>
 
+#include "OpenSimplexNoise.h"
 
-Aether::~Aether()
+Aether::Aether()
+  : _noise(0)
 {
 
 }
@@ -24,6 +23,7 @@ bool Aether::OnUserCreate()
 
 bool Aether::OnUserUpdate(float fElapsedTime)
 {
+    this->_totalElapsedTime += fElapsedTime;
 	Clear(olc::BLACK);
 	Plane::OnUserUpdate(fElapsedTime);
 
@@ -33,12 +33,13 @@ bool Aether::OnUserUpdate(float fElapsedTime)
 	double maxx = maxX();
 	double maxy = maxY();
 
-	int s = 90;
-	for (int x = -s; x < s; x++)
+
+	for (int x = 0; x < Plane::ScreenWidth(); x++)
 	{
-		for (int y = -s; y < s; y++)
+		for (int y = 0; y < Plane::ScreenHeight(); y++)
 		{
-			Draw(x, y, olc::YELLOW);
+            double value = (this->_noise.Evaluate(Plane::stocx(x), Plane::stocy(y), this->_totalElapsedTime/3) +1)* 128;
+			Draw(Plane::stocx(x), Plane::stocy(y), olc::Pixel(value, value, value, 255));
 		}
 	}
 

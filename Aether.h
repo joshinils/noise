@@ -3,16 +3,18 @@
 
 #include "olcPixelGameEngine/olcPixelGameEngine.h"
 #include "plane/Plane.h"
+#include "OpenSimplexNoise.h"
 
 class Aether
 	: public Plane
 {
-
 private:
+    double _totalElapsedTime = 0;
+    OpenSimplexNoise _noise;
 
 public:
 	Aether();
-	~Aether();
+	~Aether() = default;
 
 	virtual bool OnUserCreate();
 	virtual bool OnUserUpdate(float fElapsedTime);

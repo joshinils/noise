@@ -20,6 +20,8 @@ add_executable("${PROJECT_NAME}"
 	"plane/Vec2d.h"
 	"plane/Vec2d.cpp"
 	"olcPixelGameEngine/olcPixelGameEngine.h"
+	"OpenSimplexNoise.cpp"
+	"OpenSimplexNoise.h"
 )
 
 include_directories(olcPixelGameEngine)
