@@ -11,6 +11,7 @@ class Aether
 private:
     double _totalElapsedTime = 0;
     OpenSimplexNoise _noise;
+    OpenSimplexNoise _small;
 
 public:
 	Aether();
